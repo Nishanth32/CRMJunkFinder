@@ -1,0 +1,54 @@
+﻿<Window x:Class="JunkResourceFinder.ExecuteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JunkResourceFinder"
+        mc:Ignorable="d"
+        Title="ExecuteWindow" Width="auto" Height="auto" ResizeMode="CanResize">
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Margin="10,10,10,10" Name="grpBoxInfo" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <Label>Total Resource Found :</Label>
+                <Label Name="lblTotalResource"></Label>
+
+                <Label Margin="90,0,0,0">Total Matches :</Label>
+                <Label Name="lblTotalMatches"></Label>
+
+                <Label Margin="90,0,0,0">Total Junks :</Label>
+                <Label Name="lblTotalJunks"></Label>
+
+                <Button Margin="90,0,0,0" Name="btnExportToExcel" Click="btnExportToExcel_Click">Export to Excel</Button>
+            </StackPanel>
+            
+        </GroupBox>
+        <StackPanel Grid.Row="0" Name="loadPanel" Orientation="Vertical" Margin="10,10,10,10" Visibility="Visible">
+            <Label>Please wait....</Label>
+            <ProgressBar Foreground="Azure" IsIndeterminate="True" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="1000" RenderTransformOrigin="0.5,0.5">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+        </StackPanel>
+        <DataGrid Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="True" Grid.ColumnSpan="1" x:Name="dataGrid" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Height="auto" Width="auto">
+            <DataGrid.Resources>
+                <Style TargetType="Hyperlink">
+                    <EventSetter Event="Click" Handler="grid_Hyperlink_Click"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+
+    </Grid>
+</Window>
